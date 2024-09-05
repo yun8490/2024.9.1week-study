@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="study0903.css">
+    <title>Document</title>
+</head>
+
+<body class="darkmode">
+    <div class="black-bg">
+        <div class="white-bg">
+            <h4>로그인</h4>
+            <form action="success.html">
+                <div class="my-3">
+                    <input type="text" class="form-control idInput" placeholder="아이디를 입력해주세요.">
+                </div>
+                <div class="my-3">
+                    <input type="password" class="form-control passInput" placeholder="패스워드를 입력해주세요.">
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitBtn">전송</button>
+                <button type="button" class="btn btn-danger" id="closeBtn">닫기</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-bg">
+        <h4>Shirts on Sale</h4>
+        <button id="loginBtn" class="btn btn-danger loginBtn">로그인</button>
+    </div>
+    <div class="container">
+        <h3>2020202020</h3>
+    </div>
+    <button class="badge bg-dark ms-auto mx-3">Dark 🔄</button>
+
+    <!-- ==========================script========================== -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <script>
+        $('.navbar-toggler').on('click', function () {
+            $('.list-group').toggleClass('show');
+        });
+        $('.loginBtn').on('click', function () {
+            $('.black-bg').addClass('showModal');
+        });
+        $('#closeBtn').on('click', function () {
+            $('.black-bg').removeClass('showModal');
+        });
+
+        // <!-- ==========================알림창 script========================== -->
+        
+        // form타입을 가져오고 submit버튼 타입이 발동될때 밑에코드 수행해라
+        // function(event) => 이벤트 핸들러 함수 이벤트발생할때 수행할 동작을 코드로 정의
+        // $('form').on('submit',function(event) 이렇게 해도되고
+        // $('#submitBtn').on('click',function(event) 이렇게도 해도됨
+        $('form').on('submit',function(event){
+            // inInput인 input박스가 val(안에있는값)이 공백이면 밑에 코드 수행
+            if($('.idInput').val() == ''){
+                alert('아이디를 입력하세요.')
+                // 공백이면 알림창띄우고 idInput 박스에 커서 올려라
+                $('.idInput').focus();
+                // 공백이면 폼 제출을 막아라~ action하지마라
+                event.preventDefault();
+            }
+            if($('.passInput').val() == ''){
+                alert('패스워드를 입력하세요.')
+                $('.passInput').focus();
+                event.preventDefault();
+            // 공백이 아니면 다음 코드 elseif로 넘어가고 패스워드 인풋안에 글자가 6개 이하이면 알림창을 띄움.
+            // === 등호 3개는 엄격한 비교
+            }else if($('.passInput').val().length <= 6){
+                alert('패스워드를 6자 이상 입력하세요.');
+                $('.passInput').focus();
+                event.preventDefault();
+            }
+        });
+        
+        // 뱃지 클릭 횟수, 변수 함수안에서 만들면 지역변수됨(var)
+        // let변수타입 => 재선언이 불가능, 함수안 중괄호가 범위
+        // const변수타입 => 재선언,재할당 불가능, 함수안 중괄호가 범위
+        var count = 0;
+        $('.badge').on('click',function(){
+            count += 1;
+            if(count % 2 == 1){
+                $('.badge').html('Light 🔄');
+                $('.darkmode').addClass('whitemode');
+            }else {
+                $('.badge').html('Dark 🔄');
+                $('.darkmode').removeClass('whitemode')
+        }
+        });
+
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+
+</body>
+
+</html>
